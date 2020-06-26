@@ -18,8 +18,8 @@ end
 @testset "Question 2" begin
     @test isreversecomplement("aaatttcg", "cgaaattt")
     @test !isreversecomplement("C", "A")
-    @test_throws Error isreversecomplement("TX", "AG")
-    @test_throws Error isreversecomplement("G", "CC")
+    @test_throws ErrorException isreversecomplement("TX", "AG")
+    @test_throws ErrorException isreversecomplement("G", "CC")
 end
 
 @testset "Question 3" begin
@@ -30,20 +30,22 @@ end
 end
 
 @testset "Question 4" begin
-    q4a = string.(split(Assignment05.first15))
-    f15 = split(read(Cmd(q4a), String), '\n')
+    q4a = string.(split(Assignment05.first15))[1:end-1]
+    push!(q4a, wordspath)
+    f15 = split(read(Cmd(q4a), String), '\n', keepempty=false)
     alllines = readlines(wordspath)
     @test f15 == alllines[1:15]
-    q4b = string.(split(Assignment05.last15))
-    l15 = split(read(Cmd(q4b), String), '\n')
+    q4b = string.(split(Assignment05.last15))[1:end-1]
+    push!(q4b, wordspath)
+    l15 = split(read(Cmd(q4b), String), '\n', keepempty=false)
     @test l15 == alllines[end-14:end]
 end
 
 @testset "Question 5" begin
-    alllines = uppercase.(readlines(test_words))
+    alllines = uppercase.(readlines(testpath))
     filter!(l-> all(c-> in(c, "ATGC"), l), alllines)
     @test length(alllines) == 3
-    @test alllines == find_dna(test_words)
+    @test alllines == find_dna(testpath)
 end
 
 end # Assignment05
