@@ -1,10 +1,11 @@
 module Assignment05
 
-export question1,
-       question2,
-       question3,
-       question4,
-       question5
+export isreverse,
+       complement,
+       isreversecomplement,
+       isreversecomplement,
+       reverse_complement,
+       find_dna       
 
 include("assignment.jl")
 
